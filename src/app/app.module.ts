@@ -13,7 +13,7 @@ import { NestedFormComponent } from './forms/nested-form/nested-form.component';
 
 import { Routes, RouterModule } from '@angular/router';
 import { FooterComponent } from './footer/footer.component';
-
+import { FormsModule } from '@angular/forms'
 
 const routes: Routes = [
   {path: '', redirectTo: 'template', pathMatch: 'full'},
@@ -35,7 +35,8 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
-    HighlightModule.forRoot({ theme: 'arduino-light'})
+    HighlightModule.forRoot({ theme: 'arduino-light'}),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

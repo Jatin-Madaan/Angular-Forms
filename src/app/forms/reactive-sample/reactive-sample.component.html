@@ -18,7 +18,7 @@
           <div class="col">
             <div class="form-group">
               <label for="fnText">First Name</label>
-              <input type="text" class="form-control" id="fnText" placeholder="Enter first name" formControlName="firstName" [(ngModel)]="user.fname">
+              <input type="text" class="form-control" id="fnText" placeholder="Enter first name" formControlName="firstName">
               <small id="fnHelp" class="form-text custom-invalid-feedback">Field is required</small>
             </div>
           </div>
@@ -88,8 +88,12 @@
               <div class="col">
                 <div class="form-group">
                   <label for="zipcode">Zip Code</label>
-                  <input type="text" class="form-control" id="zipcode" formControlName="zipcode" placeholder="Enter Zip">
-                  <small class="form-text custom-invalid-feedback">Field is required</small>
+                  <input type="text" id="zipcode" formControlName="zipcode"
+                  [ngClass]="{'form-control' : true,
+                  'is-invalid' : !zipcode.valid && zipcode.touched,
+                  'is-valid': zipcode.valid && zipcode.touched }" placeholder="Enter Zip">
+                  <small class="form-text custom-invalid-feedback" *ngIf="zipcode.errors?.required && zipcode.touched">Field is required</small>
+                  <small class="form-text custom-invalid-feedback" *ngIf="zipcode.errors?.pattern && zipcode.touched">Enter Correct Zipcode</small>
                 </div>
               </div>
             </div>

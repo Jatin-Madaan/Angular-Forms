@@ -18,14 +18,23 @@
           <div class="col">
             <div class="form-group">
               <label for="fnText">First Name</label>
-              <input type="text" ngModel name="firstName" class="form-control" [(ngModel)]="user.fname" id="fnText" placeholder="Enter first name">
-              <small id="fnHelp" class="form-text custom-invalid-feedback">Field is required</small>
+              <input type="text" ngModel name="firstName" 
+                #firstName="ngModel"
+               [ngClass]="{'form-control': true, 
+               'is-invalid': !firstName?.valid && firstName?.touched,
+                'is-valid' : firstName?.valid && firstName?.touched }"
+               id="fnText" placeholder="Enter first name" minlength="2" required>
+              <small id="fnHelp" *ngIf="firstName?.errors?.required && firstName?.touched"
+              class="form-text custom-invalid-feedback">Field is required</small>
+              <small id="fnHelp" *ngIf="firstName?.errors?.minlength && firstName?.touched"
+              class="form-text custom-invalid-feedback">Field is required atleast 2 characters</small>
             </div>
           </div>
           <div class="col">
             <div class="form-group">
               <label for="lnText">Last Name</label>
-              <input type="text" ngModel name="lastName" class="form-control" [(ngModel)]="user.lname" id="lnText" placeholder="Enter last name">
+              <input type="text" ngModel name="lastName" class="form-control"
+               id="lnText" placeholder="Enter last name" minlength="2" required>
               <small id="fnHelp" class="form-text custom-invalid-feedback">Field is required</small>
             </div>
           </div>
@@ -101,7 +110,7 @@
         <!-- final action buttons -->
         <div class="row justify-content-center">
           <div class="col-2">
-            <button type="button" class="btn btn-primary" (click)="submitHandler(myForm)">Submit</button>
+            <button type="button" class="btn btn-primary" (click)="submitHandler(myForm)" [disabled]="!myForm.form.valid">Submit</button>
           </div>
         </div>
       </div>

@@ -122,9 +122,10 @@
                   <input type="text" [ngClass]="{'form-control': true, 
                   'is-invalid': !zipcode?.valid && zipcode?.touched,
                   'is-valid' : zipcode?.valid && zipcode?.touched }"
-                   name="zipcode" ngModel #zipcode="ngModel" id="zipcode" placeholder="Enter city" required pattern="^[1-9][0-9]{5}">
-                  <small class="form-text custom-invalid-feedback" *ngIf="zipcode?.errors?.required && zipcode?.touched">Zip is required</small>
-                  <small class="form-text custom-invalid-feedback" *ngIf="zipcode?.errors?.pattern && zipcode?.touched">Enter orrect zip code</small>
+                   name="zipcode" ngModel #zipcode="ngModel" id="zipcode" placeholder="Enter city" appZipValidator>
+                   <!-- Custom zip validator directive inserted  -->
+                  <small class="form-text custom-invalid-feedback" *ngIf="zipcode?.errors?.cus_required && zipcode?.touched">{{zipcode?.errors?.cus_required}}</small>
+                  <small class="form-text custom-invalid-feedback" *ngIf="zipcode?.errors?.cus_pattern && zipcode?.touched">{{zipcode?.errors?.cus_pattern}}</small>
                 </div>
               </div>
             </div>
